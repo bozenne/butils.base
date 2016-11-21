@@ -1,0 +1,4 @@
+#+BEGIN_HTML
+<a href="https://travis-ci.org/bozenne/butils.base"><img src="https://travis-ci.org/bozenne/butils.base.svg?branch=master"></a>
+#+END_HTML
+
