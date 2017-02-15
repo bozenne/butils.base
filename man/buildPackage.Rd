@@ -5,7 +5,7 @@
 \title{Integrative function for building packages}
 \usage{
 buildPackage(package, version = NULL, path = path_gitHub(),
-  compileAttributes = TRUE, updateCollate = TRUE, updateDate = TRUE,
+  compileAttributes = TRUE, updateCollate = FALSE, updateDate = TRUE,
   roxygenise = TRUE, build = TRUE, options.build = NULL, untar = TRUE,
   check = FALSE, options.check = NULL, install = TRUE,
   options.install = "--build", trace = 2, clearExisting = TRUE,

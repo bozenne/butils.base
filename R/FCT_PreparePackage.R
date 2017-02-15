@@ -32,7 +32,7 @@
 #' 
 #' @export
 buildPackage <- function(package, version = NULL, path = path_gitHub(), 
-                         compileAttributes = TRUE, updateCollate = TRUE, updateDate = TRUE, roxygenise = TRUE,
+                         compileAttributes = TRUE, updateCollate = FALSE, updateDate = TRUE, roxygenise = TRUE,
                          build = TRUE, options.build = NULL, 
                          untar = TRUE, 
                          check = FALSE, options.check = NULL, 
@@ -74,6 +74,7 @@ buildPackage <- function(package, version = NULL, path = path_gitHub(),
   if(roxygenise){
     if(trace>=2)cat(">> roxygenise \n")
     roxygen2::roxygenise(package)
+    
     if(trace>=2)cat("\n")
   } 
   

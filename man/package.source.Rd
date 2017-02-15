@@ -5,7 +5,7 @@
 \title{Source a package directory}
 \usage{
 package.source(name, path = path_gitHub(), Rpackage = TRUE, Rcode = TRUE,
-  RorderDescription = TRUE, attach = TRUE, Ccode = FALSE,
+  RorderDescription = FALSE, attach = TRUE, Ccode = FALSE,
   rebuild = FALSE, warning = TRUE)
 }
 \arguments{

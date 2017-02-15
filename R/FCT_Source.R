@@ -20,7 +20,7 @@
 #' @export
 package.source <- function(name, path = path_gitHub(), 
                            Rpackage = TRUE,
-                           Rcode = TRUE, RorderDescription = TRUE, attach = TRUE,
+                           Rcode = TRUE, RorderDescription = FALSE, attach = TRUE,
                            Ccode = FALSE, rebuild = FALSE,
                            warning = TRUE){
   

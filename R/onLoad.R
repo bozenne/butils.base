@@ -1,8 +1,8 @@
 '.onAttach' <- function(lib, pkg="butils") {
   desc <- utils::packageDescription(pkg)
-  packageStartupMessage(desc$Package, " version ",desc$Version)
+  packageStartupMessage(desc$Package, " version ",desc$Version)  
+  options(error = function()revTraceback(max.lines = 5))
 }
-
 
 
 `%||%` <- get("%||%", envir = asNamespace("devtools"), inherits = FALSE)
