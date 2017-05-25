@@ -133,16 +133,18 @@ package.source <- function(name, path = path_gitHub(),
     }
   }
     
-  if(Ccode){
-    validPath(file.path(path, name, "src"), type = "dir", method = "package.source")
+  test.src <- try(validPath(file.path(path, name, "src"), type = "dir", method = "package.source"), silent = TRUE)
+  if(Ccode && identical(test.src,TRUE)){
+    
     fileNames <- list.files(file.path(path, name, "src"))
+    if(length(fileNames)>0){
     fileExts <- tools::file_path_sans_ext(fileNames)
     indexC <- grep("cpp", x = tools::file_ext(fileNames), 
                    fixed = FALSE)
     lapply(file.path(path,name,"src",setdiff(fileNames[indexC],"RcppExports.cpp")), 
            Rcpp::sourceCpp, 
            rebuild = rebuild)
-    
+    }
   }
   
   return(invisible(TRUE))
