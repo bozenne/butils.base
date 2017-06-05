@@ -1,4 +1,6 @@
 language: r
+latex: false
+
 sudo: required
 
 r_check_args: --as-cran 

@@ -25,6 +25,9 @@ package.source <- function(name, path = path_gitHub(),
                            Ccode = FALSE, rebuild = FALSE,
                            warning = TRUE){
   
+  .onAttach <- NULL
+  .onLoad <- NULL
+  
   validPath(path, type = "dir", method = "package.source")
   validPath(file.path(path, name), type = "dir", method = "package.source")
   if(Rpackage){

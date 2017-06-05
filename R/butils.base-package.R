@@ -15,7 +15,7 @@
 #' @importFrom stats na.omit 
 #' @importFrom stringr str_pad
 #' @importFrom tools file_ext file_path_sans_ext list_files_with_exts
-#' @importFrom utils setTxtProgressBar tail txtProgressBar  
+#' @importFrom utils capture.output setTxtProgressBar tail txtProgressBar  
 #' @importFrom xml2 read_html
 #' @importFrom zoo as.Date
 NULL

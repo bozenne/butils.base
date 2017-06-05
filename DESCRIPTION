@@ -27,8 +27,4 @@ Imports:
   zoo
 LazyLoad: yes
 NeedsCompilation: no
-<<<<<<< HEAD
 RoxygenNote: 6.0.1
-=======
-RoxygenNote: 5.0.1
->>>>>>> 76205ca9b223b8ab6d12c3e4023e72cc3266dcfe
