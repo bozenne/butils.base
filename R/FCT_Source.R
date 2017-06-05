@@ -7,7 +7,8 @@
 #' @param Rpackage should the related R package be loaded
 #' @param Rcode should all the .R be sourced
 #' @param RorderDescription should the R files be sourced in the order indicate by collate
-#' @param attach source the .onAttach function if it is present in the current environment
+#' @param onAttach source the .onAttach function if it is present in the current environment
+#' @param onLoad source the .onLoad function if it is present in the current environment
 #' @param Ccode should all the .cpp file be source (using Rcpp::sourceCpp)
 #' @param rebuild Force a rebuild of the shared library (from Rcpp:::sourceCpp).
 #' @param warning should a warning be displayed if some of the R files are not sourced
@@ -20,7 +21,7 @@
 #' @export
 package.source <- function(name, path = path_gitHub(), 
                            Rpackage = TRUE,
-                           Rcode = TRUE, RorderDescription = FALSE, attach = TRUE,
+                           Rcode = TRUE, RorderDescription = FALSE, onAttach = TRUE, onLoad = TRUE,
                            Ccode = FALSE, rebuild = FALSE,
                            warning = TRUE){
   
@@ -89,30 +90,61 @@ package.source <- function(name, path = path_gitHub(),
       }
       fileNames <- filesR.description[filesR.description %in% fileNames]
     }
+        
+    ## mimic .onload
+    if(onAttach && exists(".onAttach") && class(.onAttach) == "function"){
+        ..onAttach <- .onAttach
+        ..onAttach_envir <- environment(fun = .onAttach)
+        ..onAttach_test <- TRUE
+        try(rm(.onAttach, envir = ..onAttach_envir), silent = TRUE)
+    }else{
+        ..onAttach_test <- FALSE
+    }
+    
+    if(onLoad && exists(".onLoad") && class(.onLoad) == "function"){
+        ..onLoad <- .onLoad
+        ..onLoad_envir <- environment(fun = .onLoad)
+        ..onLoad_test <- TRUE
+        try(rm(.onLoad, envir = ..onLoad_envir), silent = TRUE)
+    }else{
+        ..onLoad_test <- FALSE
+    }
+
     
     ## SOURCE
-    lapply(file.path(path,name,"R",fileNames), source)
+    res <- lapply(file.path(path,name,"R",fileNames), source)
     
-    ## mimic .onload
-    .onAttach_save <- .onAttach
-    .onAttach <- NULL
-	on.exit(.onAttach <- .onAttach_save)
-	
-	if(attach && exists(".onAttach") && !is.null(.onAttach)){
-      .onAttach()
+    if(onAttach){
+        if(exists(".onAttach") && class(.onAttach) == "function"){
+            .onAttach()
+        }
+        if(..onAttach_test){        
+            try(assign(".onAttach", value = ..onAttach, envir = ..onAttach_envir), silent = TRUE)
+        }
+    }
+    
+    if(onLoad){
+        if(exists(".onLoad") && class(.onLoad) == "function"){
+            .onLoad()
+        }
+        if(..onLoad_test){
+            try(assign(".onLoad", value = ..onLoad, envir = ..onLoad_envir), silent = TRUE)
+        }
     }
   }
-  
-  if(Ccode){
-    validPath(file.path(path, name, "src"), type = "dir", method = "package.source")
+    
+  test.src <- try(validPath(file.path(path, name, "src"), type = "dir", method = "package.source"), silent = TRUE)
+  if(Ccode && identical(test.src,TRUE)){
+    
     fileNames <- list.files(file.path(path, name, "src"))
+    if(length(fileNames)>0){
     fileExts <- tools::file_path_sans_ext(fileNames)
     indexC <- grep("cpp", x = tools::file_ext(fileNames), 
                    fixed = FALSE)
     lapply(file.path(path,name,"src",setdiff(fileNames[indexC],"RcppExports.cpp")), 
            Rcpp::sourceCpp, 
            rebuild = rebuild)
-    
+    }
   }
   
   return(invisible(TRUE))

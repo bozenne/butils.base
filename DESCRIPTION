@@ -1,6 +1,6 @@
 Package: butils.base
 Type: Package
-Title: Tools to source R code or install R packages 
+Title: Tools to source R code or install R packages.
 Version: 1.0
 Date: 2017-06-05
 Author: Brice Ozenne[aut]
@@ -18,13 +18,17 @@ Imports:
   pipeR,
   Rcpp,
   roxygen2, 
-	rvest,
-	stats,
-	stringr,	
-	tools,
-	utils,
-	xml2,
-	zoo
+  rvest,
+  stats,
+  stringr,	
+  tools,
+  utils,
+  xml2,
+  zoo
 LazyLoad: yes
 NeedsCompilation: no
+<<<<<<< HEAD
 RoxygenNote: 6.0.1
+=======
+RoxygenNote: 5.0.1
+>>>>>>> 76205ca9b223b8ab6d12c3e4023e72cc3266dcfe

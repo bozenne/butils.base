@@ -47,7 +47,7 @@ buildPackage <- function(package, version = NULL, path = path_gitHub(),
   }
  
   if(is.null(version)){
-    version <- read_description(package, path = path_gitHub(), field = "Version")
+    version <- read_description(package, path = ".", field = "Version")
   }
   
   packageVersion <- paste(package, version, sep = "_")
