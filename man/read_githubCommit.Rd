@@ -35,4 +35,3 @@ read_githubCommit("bozenne/BuyseTest",rev.commit = TRUE)
 }
 \keyword{function}
 \keyword{github}
-

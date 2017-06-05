@@ -24,4 +24,3 @@ file <- read_description("butils", path = path_gitHub())
 write_description("butils", path = path_gitHub(), file)
 }
 }
-

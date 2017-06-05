@@ -38,4 +38,3 @@ install_githubCommit("bozenne/BuyseTest", ref = commit)
 \keyword{function}
 \keyword{github}
 \keyword{package}
-

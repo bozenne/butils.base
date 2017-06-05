@@ -5,11 +5,12 @@
 \title{Integrative function for building packages}
 \usage{
 buildPackage(package, version = NULL, path = path_gitHub(),
-  compileAttributes = TRUE, updateCollate = FALSE, updateDate = TRUE,
-  roxygenise = TRUE, build = TRUE, options.build = NULL, untar = TRUE,
-  check = FALSE, options.check = NULL, install = TRUE,
-  options.install = "--build", trace = 2, clearExisting = TRUE,
-  clearRcheck = TRUE, clearInstall = TRUE)
+  routineRegistration = TRUE, compileAttributes = TRUE,
+  updateCollate = FALSE, updateDate = TRUE, roxygenise = TRUE,
+  build = TRUE, options.build = NULL, untar = TRUE, check = FALSE,
+  options.check = NULL, install = TRUE, options.install = "--build",
+  trace = 2, clearExisting = TRUE, clearRcheck = TRUE,
+  clearInstall = TRUE)
 }
 \arguments{
 \item{package}{the name of the package}
@@ -17,6 +18,8 @@ buildPackage(package, version = NULL, path = path_gitHub(),
 \item{version}{the version of the package}
 
 \item{path}{the position of the directory containing the package}
+
+\item{routineRegistration}{should the function \code{package_native_routine_registration_skeleton} be used to register C++ routines.}
 
 \item{compileAttributes}{should the function \code{compileAttributes} be used to enerates the bindings required to call C++ functions from R for functions adorned with the Rcpp::export attribute.}
 
@@ -57,4 +60,3 @@ buildPackage("butils")
 }
 \keyword{function}
 \keyword{package}
-

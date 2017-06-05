@@ -8,6 +8,7 @@
 #' @param package the name of the package
 #' @param version the version of the package
 #' @param path the position of the directory containing the package
+#' @param routineRegistration should the function \code{package_native_routine_registration_skeleton} be used to register C++ routines.
 #' @param compileAttributes should the function \code{compileAttributes} be used to enerates the bindings required to call C++ functions from R for functions adorned with the Rcpp::export attribute.
 #' @param updateCollate should the collate field of the DESCRIPTION file be updated according the content of the R directory.
 #' @param updateDate should the date field of the DESCRIPTION file be updated with the date of the date.
@@ -32,7 +33,7 @@
 #' 
 #' @export
 buildPackage <- function(package, version = NULL, path = path_gitHub(), 
-                         compileAttributes = TRUE, updateCollate = FALSE, updateDate = TRUE, roxygenise = TRUE,
+                         routineRegistration = TRUE, compileAttributes = TRUE, updateCollate = FALSE, updateDate = TRUE, roxygenise = TRUE,
                          build = TRUE, options.build = NULL, 
                          untar = TRUE, 
                          check = FALSE, options.check = NULL, 
@@ -52,8 +53,18 @@ buildPackage <- function(package, version = NULL, path = path_gitHub(),
   packageVersion <- paste(package, version, sep = "_")
   path.Wpackage <- package
   path.WpackageVersion <- packageVersion
+  test.src <- try(validPath(file.path(path.Wpackage, "src"), type = "dir", method = "buildPackage"), silent = TRUE)
   
-  if(compileAttributes){
+  if(routineRegistration && identical(test.src,TRUE)){
+    if(trace>=2)cat(">> add Native Routine Registration \n")
+    txtRegistration <- capture.output(tools::package_native_routine_registration_skeleton(dir = path.Wpackage))
+    txtRegistration <- paste(txtRegistration,collapse="\n")
+    con <- file(file.path(path.Wpackage,"src","declareRoutines.c"), "wb") 
+    writeBin(txtRegistration, con) 
+    close(con) 
+  }
+  
+  if(compileAttributes && identical(test.src,TRUE)){
     if(trace>=2)cat(">> compileAttributes \n")
     Rcpp::compileAttributes(pkgdir = path.Wpackage, verbose = (trace>=3))
   } 

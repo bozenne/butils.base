@@ -37,4 +37,3 @@ package.source("riskRegression")
 \seealso{
 \code{\link{path_gitHub}}
 }
-

@@ -21,4 +21,3 @@ write the date field in the DESCRIPTION file of a package
 write_date("butils", path = path_gitHub())
 }
 }
-
