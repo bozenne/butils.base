@@ -33,7 +33,7 @@
 #' 
 #' @export
 buildPackage <- function(package, version = NULL, path = path_gitHub(), 
-                         routineRegistration = TRUE, compileAttributes = TRUE, updateCollate = FALSE, updateDate = TRUE, roxygenise = TRUE,
+                         routineRegistration = FALSE, compileAttributes = TRUE, updateCollate = FALSE, updateDate = TRUE, roxygenise = TRUE,
                          build = TRUE, options.build = NULL, 
                          untar = TRUE, 
                          check = FALSE, options.check = NULL, 
