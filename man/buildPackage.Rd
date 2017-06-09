@@ -5,7 +5,7 @@
 \title{Integrative function for building packages}
 \usage{
 buildPackage(package, version = NULL, path = path_gitHub(),
-  routineRegistration = TRUE, compileAttributes = TRUE,
+  routineRegistration = FALSE, compileAttributes = TRUE,
   updateCollate = FALSE, updateDate = TRUE, roxygenise = TRUE,
   build = TRUE, options.build = NULL, untar = TRUE, check = FALSE,
   options.check = NULL, install = TRUE, options.install = "--build",
@@ -60,3 +60,4 @@ buildPackage("butils")
 }
 \keyword{function}
 \keyword{package}
+

@@ -18,3 +18,4 @@ path_gitHub()
 }
 \keyword{function}
 \keyword{package}
+

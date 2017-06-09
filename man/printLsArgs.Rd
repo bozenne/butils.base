@@ -21,3 +21,4 @@ printLsArgs(dir, write.file = FALSE, filename = "List_of_arguments",
 \description{
 Create a file in inst containing the description of all the arguments from the Rd file of a package
 }
+
