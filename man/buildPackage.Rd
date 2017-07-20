@@ -60,4 +60,3 @@ buildPackage("butils")
 }
 \keyword{function}
 \keyword{package}
-

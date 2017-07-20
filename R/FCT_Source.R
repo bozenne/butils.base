@@ -25,9 +25,6 @@ package.source <- function(name, path = path_gitHub(),
                            Ccode = FALSE, rebuild = FALSE,
                            warning = TRUE){
   
-  .onAttach <- NULL
-  .onLoad <- NULL
-  
   validPath(path, type = "dir", method = "package.source")
   validPath(file.path(path, name), type = "dir", method = "package.source")
   if(Rpackage){
@@ -95,30 +92,34 @@ package.source <- function(name, path = path_gitHub(),
     }
         
     ## mimic .onload
-    if(onAttach && exists(".onAttach") && class(.onAttach) == "function"){
+    .onAttach <- try(get(".onAttach", envir = globalenv()), silent = TRUE)
+    if(onAttach && class(.onAttach) == "function"){
         ..onAttach <- .onAttach
         ..onAttach_envir <- environment(fun = .onAttach)
+        assign(".onAttach", value = NULL, envir = ..onAttach_envir)
         ..onAttach_test <- TRUE
-        try(rm(.onAttach, envir = ..onAttach_envir), silent = TRUE)
     }else{
         ..onAttach_test <- FALSE
     }
     
-    if(onLoad && exists(".onLoad") && class(.onLoad) == "function"){
+    .onLoad <- try(get(".onLoad", envir = globalenv()), silent = TRUE)
+    if(onLoad && class(.onLoad) == "function"){
         ..onLoad <- .onLoad
         ..onLoad_envir <- environment(fun = .onLoad)
+        assign(".onLoad", value = NULL, envir = ..onLoad_envir)
         ..onLoad_test <- TRUE
-        try(rm(.onLoad, envir = ..onLoad_envir), silent = TRUE)
     }else{
         ..onLoad_test <- FALSE
     }
 
     
+    
     ## SOURCE
     res <- lapply(file.path(path,name,"R",fileNames), source)
     
+    .onAttach <- try(get(".onAttach", envir = globalenv()), silent = TRUE)
     if(onAttach){
-        if(exists(".onAttach") && class(.onAttach) == "function"){
+        if(class(.onAttach) == "function"){
             .onAttach()
         }
         if(..onAttach_test){        
@@ -126,8 +127,10 @@ package.source <- function(name, path = path_gitHub(),
         }
     }
     
+    
+    .onLoad <- try(get(".onLoad", envir = globalenv()), silent = TRUE)
     if(onLoad){
-        if(exists(".onLoad") && class(.onLoad) == "function"){
+        if(class(.onLoad) == "function"){
             .onLoad()
         }
         if(..onLoad_test){

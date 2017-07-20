@@ -315,5 +315,37 @@ printLsArgs <- function(dir,write.file=FALSE,filename="List_of_arguments",path=N
   
 }
 
+#' @title Help function to fill the file declareRoutines.c
+#' @description Help function to fill the file declareRoutines.c
+#' 
+#' @param fctName A character string containig the name of the function
+#'
+#' @examples 
+#' \dontrun{
+#' library(devtools)
+#' library(tools)
+#' path2package <- file.path(path_gitHub(),"lavaReduce")
+#' setwd(path2package)
+#' Rcpp::compileAttributes(pkgdir = path2package)
+#' x <- capture.output(package_native_routine_registration_skeleton(dir = ".",,,FALSE))
+#' cat(paste(x,collapse = "\n"))
+#' 
+#' 
+#' }
+#'
 
+countCppArgs <- function(fctName){
+  fct <- eval(parse(text=fctName))
+  
+  ls.args <- as.list(args(fct))
+  package <- environmentName(environment(fct))
+  
+  allArgs <- setdiff(names(ls.args),"")
+  n.args <- length(allArgs)
+  
+  line1 <- paste0("extern SEXP ",package,"_",fctName,"(",paste(rep(SEXP,n.args),collapse=","),");")
+  line2 <- paste0("{\"",package,"_",fctName,"\", (FL_FUNC) &",package,"_",fctName,n.args,"},")
+  return(list(extern=line1,
+              CallEntries=line2))
+}
 

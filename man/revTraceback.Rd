@@ -20,4 +20,3 @@ revTraceback(x = NULL, max.lines = getOption("deparse.max.lines"),
 \description{
 Same as \code{base::traceback} but in reverse order
 }
-

@@ -24,4 +24,3 @@ read_htmlLinks("https://github.com/bozenne/BuyseTest")
 }
 \keyword{function}
 \keyword{url}
-
