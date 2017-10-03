@@ -3,9 +3,9 @@
 ## author: Brice Ozenne
 ## created: okt  3 2017 (09:55) 
 ## Version: 
-## last-updated: okt  3 2017 (16:14) 
+## last-updated: okt  3 2017 (17:17) 
 ##           By: Brice Ozenne
-##     Update #: 91
+##     Update #: 105
 #----------------------------------------------------------------------
 ## 
 ### Commentary: 
@@ -43,12 +43,12 @@ listDocArgs <- function(dir,trace=TRUE){
     file_Rd <- list.files(dir.man, pattern = ".Rd")
   
     if(length(file_Rd)==0){
-        cat("no \'.Rd\' files founded in the \'",dir,"\' directory \n",sep="")
+        cat("no \'.Rd\' files found in the \'",dir,"\' directory \n",sep="")
         return(invisible(NULL))
     }
   
     n.files <- length(file_Rd)
-    if(trace==TRUE){cat(n.files,"files founded \n")}
+    if(trace==TRUE){cat(n.files,"files found \n")}
   
     #### loop over files to extract args, function name, and doc
     ls.args <- NULL
@@ -62,7 +62,7 @@ listDocArgs <- function(dir,trace=TRUE){
     }
   
     for(iter_file in 1:n.files){
-        
+
         ## extract sections
         ls.sections <- extractSectionFromRD(file.path(dir.man,file_Rd[iter_file]))
         if("usage" %in% names(ls.sections) == FALSE){next}
@@ -77,20 +77,22 @@ listDocArgs <- function(dir,trace=TRUE){
         }
         function.name <- strsplit(name.tempo, split = "\n", fixed = TRUE)[[1]]
         Ufunction.name <- paste(function.name,collapse = " | ")
+
+        ## extract documentation
+        vec.doc <- strsplit(gsub("\\n","",ls.sections$arguments), split = "\\\\item\\{(.*?)\\}")[[1]]
+        vec.doc <- vec.doc[vec.doc!=""]
         
-        ## extract arguments        
-        args.tempo <- strsplit(gsub("\\n","",ls.sections$arguments), split = "\\\\item")[[1]]
-        args.tempo <- args.tempo[args.tempo!=""]
+        ## extract arguments
+        arg.tempo <- gsub("\\n","",ls.sections$arguments)
+        for(iDoc in vec.doc){
+            arg.tempo <- sub(iDoc,"",arg.tempo, fixed = TRUE)
+        }
+        vec.args <- strsplit(arg.tempo, split = "\\item", fixed = TRUE)[[1]]
+        vec.args <- vec.args[vec.args!=""]
 
-        args.tempo2 <- lapply(args.tempo, function(iArg){ # iArg <- ls.args[[1]]
-            expr.tempo <- gregexpr("\\{(?>[^{}]|(?R))*\\}", iArg, perl = TRUE)
-            vec.tempo <- substring(iArg[[1]], expr.tempo[[1]], expr.tempo[[1]] + attr(expr.tempo[[1]], "match.length") - 1)
-            out <- unname(sapply(vec.tempo, gsub, pattern = "^\\{|\\}$", replacement = ""))
-            return(out)
-        })
-
-        vec.args <- sapply(args.tempo2,"[[",1)
-        vec.doc <- sapply(args.tempo2,"[[",2)
+        ## remove leading and ending bracket
+        vec.doc <- unname(sapply(vec.doc, gsub, pattern = "^\\{|\\}$", replacement = ""))
+        vec.args <- unname(sapply(vec.args, gsub, pattern = "^\\{|\\}$", replacement = ""))
 
         # export
         ls.args <- c(ls.args, list(vec.args))
