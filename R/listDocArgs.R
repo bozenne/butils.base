@@ -3,9 +3,9 @@
 ## author: Brice Ozenne
 ## created: okt  3 2017 (09:55) 
 ## Version: 
-## last-updated: okt  3 2017 (17:17) 
+## last-updated: okt  3 2017 (17:47) 
 ##           By: Brice Ozenne
-##     Update #: 105
+##     Update #: 116
 #----------------------------------------------------------------------
 ## 
 ### Commentary: 
@@ -66,6 +66,7 @@ listDocArgs <- function(dir,trace=TRUE){
         ## extract sections
         ls.sections <- extractSectionFromRD(file.path(dir.man,file_Rd[iter_file]))
         if("usage" %in% names(ls.sections) == FALSE){next}
+        if("arguments" %in% names(ls.sections) == FALSE){next}
         
         ## extract function name
         expr.tempo <- gregexpr("\\((?>[^()]|(?R))*\\)", ls.sections$usage, perl = TRUE)
@@ -99,7 +100,7 @@ listDocArgs <- function(dir,trace=TRUE){
         ls.doc <- c(ls.doc, list(vec.doc))
         vec.function <- c(vec.function,function.name)
         vec.Ufunction <- c(vec.Ufunction,Ufunction.name)
-        dt.argsdoc <- rbind(dt.argsdoc, data.table(fct = Ufunction.name, args = vec.args, doc = vec.doc))
+        dt.argsdoc <- rbind(dt.argsdoc, data.table::data.table(fct = Ufunction.name, args = vec.args, doc = vec.doc))
         if(trace){
             setTxtProgressBar(pb, iter_file)
         }
