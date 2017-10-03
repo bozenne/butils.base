@@ -1,7 +1,7 @@
 #' @title Remove directory
 #' @description Remove all files from a given directory
 #'
-#' @param dirname the path leading to the directory
+#' @param dir.name the path leading to the directory
 #' @param test should the user be asked whether he really wants to remove the directory
 #' @param trace should the execution of the function be traced
 #' 
@@ -11,30 +11,30 @@
 #'    cleanDir("MyNewDirButils314", test = FALSE)
 #' }
 #' 
-cleanDir <- function(dirname,test=TRUE, trace = TRUE){
+cleanDir <- function(dir.name,test=TRUE, trace = TRUE){
   
-  dirname_split <- strsplit(dirname,split="/")[[1]]
-  if(length(dirname_split)>1){
-    path <- paste(dirname_split[-length(dirname_split)],collapse="/")
-    dirname_1 <- dirname_split[length(dirname_split)]
+  dir.name_split <- strsplit(dir.name,split="/")[[1]]
+  if(length(dir.name_split)>1){
+    path <- paste(dir.name_split[-length(dir.name_split)],collapse="/")
+    dir.name_1 <- dir.name_split[length(dir.name_split)]
   }else{
     path <- "."
-    dirname_1 <- dirname_split
+    dir.name_1 <- dir.name_split
   }
   
-  list_files <- list.files(dirname,recursive = TRUE)
+  list_files <- list.files(dir.name,recursive = TRUE)
   n.files <- length(list_files)
-  if(dirname_1 %in% list.files(path)){
+  if(dir.name_1 %in% list.files(path)){
     if(test==TRUE){
-      test <- readline(paste("should the directory \'",dirname,"\' be removed ? (1/0) : \n",
+      test <- readline(paste("should the directory \'",dir.name,"\' be removed ? (1/0) : \n",
                              "(",n.files," files )",sep=""))
     }else{
       test <- 1
     }
     
     if(test==1){
-      unlink(dirname,recursive=TRUE)
-      if(trace){cat("directory ",dirname," removed \n",sep = "")}
+      unlink(dir.name,recursive=TRUE)
+      if(trace){cat("directory ",dir.name," removed \n",sep = "")}
     }
   }else if(trace){cat("directory not in the current working directory \n")}
   
@@ -51,10 +51,10 @@ cleanDir <- function(dirname,test=TRUE, trace = TRUE){
 #' @keywords function package
 #' 
 #' @examples 
-#' path_gitHub()
+#' pathGitHub()
 #' 
 #' @export
-path_gitHub <- function(user = NULL){
+pathGitHub <- function(user = NULL){
   
   if(is.null(user)){
     if(Sys.info()["user"] != "unknown"){

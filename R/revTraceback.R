@@ -10,8 +10,7 @@
 #' @export
 revTraceback <- function (x = NULL,
                           max.lines = getOption("deparse.max.lines"),
-                          trace = TRUE) 
-{
+                          trace = TRUE){
     n <- length(x <- .traceback(x))
     if (n == 0L) 
         cat(gettext("No traceback available"), "\n")

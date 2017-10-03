@@ -4,49 +4,49 @@
 #' 
 #' @param name the name of the package
 #' @param path the path to the directory containing the package
-#' @param Rpackage should the related R package be loaded
-#' @param Rcode should all the .R be sourced
-#' @param RorderDescription should the R files be sourced in the order indicate by collate
+#' @param r.package should the related R package be loaded
+#' @param r.code should all the .R be sourced
+#' @param r.order.collate should the R files be sourced in the order indicate by collate
 #' @param onAttach source the .onAttach function if it is present in the current environment
 #' @param onLoad source the .onLoad function if it is present in the current environment
-#' @param Ccode should all the .cpp file be source (using Rcpp::sourceCpp)
+#' @param c.code should all the .cpp file be source (using Rcpp::sourceCpp)
 #' @param rebuild Force a rebuild of the shared library (from Rcpp:::sourceCpp).
 #' @param warning should a warning be displayed if some of the R files are not sourced
 #' 
-#' @seealso \code{\link{path_gitHub}}
+#' @seealso \code{\link{pathGitHub}}
 #'
 #' @examples 
 #' package.source("butils")
 #' package.source("riskRegression")
 #' @export
-package.source <- function(name, path = path_gitHub(), 
-                           Rpackage = TRUE,
-                           Rcode = TRUE, RorderDescription = FALSE, onAttach = TRUE, onLoad = TRUE,
-                           Ccode = FALSE, rebuild = FALSE,
-                           warning = TRUE){
+sourcePackage <- function(name, path = pathGitHub(), 
+                          r.package = TRUE,
+                          r.code = TRUE, r.order.collate = FALSE, onAttach = TRUE, onLoad = TRUE,
+                          c.code = FALSE, rebuild = FALSE,
+                          warning = TRUE){
   
   validPath(path, type = "dir", method = "package.source")
   validPath(file.path(path, name), type = "dir", method = "package.source")
-  if(Rpackage){
+  if(r.package){
     
-    if(identical(Rpackage,TRUE)){Rpackage <- c("Imports","Depends","Suggests")}
+    if(identical(r.package,TRUE)){r.package <- c("Imports","Depends","Suggests")}
     
-    validCharacter(Rpackage, validLength = NULL, validValues = c("Imports","Depends","Suggests"))
+    validCharacter(r.package, valid.length = NULL, valid.values = c("Imports","Depends","Suggests"))
     
     packageToLoad <- NULL
-    if("Imports" %in% Rpackage){
+    if("Imports" %in% r.package){
       packageToLoad <- c(packageToLoad,
-                         read_description(name, path = path, field = "Imports", rmComma = TRUE, rmBlanck = TRUE)
+                         readDescription(name, path = path, field = "Imports", rm.comma = TRUE, rm.blanck = TRUE)
       )
     }
-    if("Depends" %in% Rpackage){
+    if("Depends" %in% r.package){
       packageToLoad <- c(packageToLoad,
-                         read_description(name, path = path, field = "Depends", rmComma = TRUE, rmBlanck = TRUE)
+                         readDescription(name, path = path, field = "Depends", rm.comma = TRUE, rm.blanck = TRUE)
       )
     }
-    if("Suggests" %in% Rpackage){
+    if("Suggests" %in% r.package){
       packageToLoad <- c(packageToLoad,
-                         read_description(name, path = path, field = "Suggests", rmComma = TRUE, rmBlanck = TRUE)
+                         readDescription(name, path = path, field = "Suggests", rm.comma = TRUE, rm.blanck = TRUE)
       )
     }
     
@@ -62,7 +62,7 @@ package.source <- function(name, path = path_gitHub(),
     lapply(packageToLoad, require, character.only = TRUE)
   }
   
-  if(Rcode){
+  if(r.code){
     validPath(file.path(path, name, "R"), type = "dir", method = "package.source")
     
     ## find files
@@ -73,20 +73,20 @@ package.source <- function(name, path = path_gitHub(),
                    fixed = FALSE)
     fileNames <- fileNames[indexC]
       
-    if(RorderDescription){ ## reorder according DESCRIPTION
+    if(r.order.collate){ ## reorder according DESCRIPTION
       
       if(file.exists(file.path(path,name,"DESCRIPTION")) == FALSE){
         warning("package.source: no DESCRIPTION file founded \n",
-                "set \'RorderDescription\' to FALSE to source all the files that are present in the directory R \n")  
+                "set \'r.order.collate\' to FALSE to source all the files that are present in the directory R \n")  
       }
       
-      filesR.description <- read_description(name, path = path, field = "Collate", rmBlanck = TRUE, rmComma = TRUE)
+      filesR.description <- readDescription(name, path = path, field = "Collate", rm.blanck = TRUE, rm.comma = TRUE)
       filesR.description <- gsub("'|\"","",filesR.description)
       
       test.missing <- is.na(match(fileNames, filesR.description))
       if(warning && any(test.missing)){
         warning("package.source: did not find files: ",paste(fileNames[which(test.missing)], collapse = " ")," in DESCRIPTION \n",
-                "set \'RorderDescription\' to FALSE to source all the files that are present in the directory R \n")  
+                "set \'r.order.collate\' to FALSE to source all the files that are present in the directory R \n")  
       }
       fileNames <- filesR.description[filesR.description %in% fileNames]
     }
@@ -140,7 +140,7 @@ package.source <- function(name, path = path_gitHub(),
   }
     
   test.src <- try(validPath(file.path(path, name, "src"), type = "dir", method = "package.source"), silent = TRUE)
-  if(Ccode && identical(test.src,TRUE)){
+  if(c.code && identical(test.src,TRUE)){
     
     fileNames <- list.files(file.path(path, name, "src"))
     if(length(fileNames)>0){

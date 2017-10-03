@@ -4,27 +4,27 @@
 #' @param package the name of the package
 #' @param path the path to the directory containing the package
 #' @param field should a specific field of the description file be extracted
-#' @param rmBlanck should the initial blanck be removed?
-#' @param rmComma should any comma be removed?
+#' @param rm.blanck should the initial blanck be removed?
+#' @param rm.comma should any comma be removed?
 #'
 #' @examples 
 #' \dontrun{
-#' read_description <- butils:::read_description
-#' read_description("butils", path = path_gitHub())
-#' read_description("butils", path = path_gitHub(), field = "Collate")
-#' read_description("butils", path = path_gitHub(), field = "Collate", rmBlanck = FALSE)
+#' readDescription <- butils:::readDescription
+#' readDescription("butils", path = pathGitHub())
+#' readDescription("butils", path = pathGitHub(), field = "Collate")
+#' readDescription("butils", path = pathGitHub(), field = "Collate", rm.blanck = FALSE)
 #' 
-#' read_description("butils", path = path_gitHub(), field = "Version")
-#' read_description("butils", path = path_gitHub(), field = "Imports")
+#' readDescription("butils", path = pathGitHub(), field = "Version")
+#' readDescription("butils", path = pathGitHub(), field = "Imports")
 #' 
-#' read_description("riskRegression", path = path_gitHub(), field = "Collate")
-#' read_description("lava.penalty", path = path_gitHub(), field = "Suggests")
+#' readDescription("riskRegression", path = pathGitHub(), field = "Collate")
+#' readDescription("lava.penalty", path = pathGitHub(), field = "Suggests")
 #' }
-read_description <- function(package, path, field = NULL,
-                             rmBlanck = TRUE, rmComma = TRUE){
+readDescription <- function(package, path, field = NULL,
+                             rm.blanck = TRUE, rm.comma = TRUE){
   
-  validPath(path, type = "dir", method = "read_description")
-  validPath(file.path(path, package), type = "dir", method = "read_description")
+  validPath(path, type = "dir", method = "readDescription")
+  validPath(file.path(path, package), type = "dir", method = "readDescription")
   
   file.description <- readLines(file.path(path,package,"DESCRIPTION"))
   
@@ -42,14 +42,14 @@ read_description <- function(package, path, field = NULL,
   file.description <- file.description[seq(indexLine, indexLine_end)]
   
   # remove initial blanck
-  if(rmBlanck){
+  if(rm.blanck){
     file.description[1] <- gsub(paste0(field,":"),"",file.description[1]) # remove field name
      
     file.description <- trimws(file.description, which = "left") # remove blancks
     file.description <- file.description[sapply(file.description, nchar)>0] # remove first line
   }
   # remove comma
-  if(rmComma){
+  if(rm.comma){
     file.description <- gsub(",", "", x = file.description)
   }
   
@@ -61,20 +61,20 @@ read_description <- function(package, path, field = NULL,
 #' @title Update description file
 #' @description Overwrite the description file of a package
 #' 
-#' @inheritParams read_description
+#' @inheritParams readDescription
 #' @param newfile the content of the new description file
 #' @param trace should the execution of the function be traced
 #'
 #' @examples 
 #' \dontrun{
-#' file <- read_description("butils", path = path_gitHub())
-#' write_description("butils", path = path_gitHub(), file)
+#' file <- readDescription("butils", path = pathGitHub())
+#' writeDescription("butils", path = pathGitHub(), file)
 #' }
-write_description <- function(package, path, newfile, trace = TRUE){
+writeDescription <- function(package, path, newfile, trace = TRUE){
   
-  validPath(path, type = "dir", method = "write_description")
-  validPath(file.path(path, package), type = "dir", method = "write_description")
-  validPath(file.path(path, package, "DESCRIPTION"), type = "file", method = "write_description")
+  validPath(path, type = "dir", method = "writeDescription")
+  validPath(file.path(path, package), type = "dir", method = "writeDescription")
+  validPath(file.path(path, package, "DESCRIPTION"), type = "file", method = "writeDescription")
   
   ## write
   con <- file(file.path(path,package,"DESCRIPTION")) 
@@ -88,21 +88,21 @@ write_description <- function(package, path, newfile, trace = TRUE){
 #' @title write cpllate field
 #' @description write thecpllate field in the DESCRIPTION file of a package
 #' 
-#' @inheritParams read_description
+#' @inheritParams readDescription
 #' @param trace should the execution of the function be traced
 #' 
 #' @examples 
 #' \dontrun{
-#' write_collate("butils", path = path_gitHub())
+#' writeCollate("butils", path = pathGitHub())
 #' }
-write_collate <- function(package, path, trace = TRUE){
+writeCollate <- function(package, path, trace = TRUE){
   
   ## read description file
-  file.description <- read_description(package, path = path)
+  file.description <- readDescription(package, path = path)
   
   ## count white space
-  line1 <- read_description(package, path = path, field = "Collate", rmBlanck = FALSE)[2] # 2 because the first line is the field name
-  line0 <- read_description(package, path = path, field = "Collate", rmBlanck = TRUE)[1]
+  line1 <- readDescription(package, path = path, field = "Collate", rm.blanck = FALSE)[2] # 2 because the first line is the field name
+  line0 <- readDescription(package, path = path, field = "Collate", rm.blanck = TRUE)[1]
   space <- stringr::str_pad("", width=nchar(line1)-nchar(line0), side="right")
   
   ## list all R files
@@ -141,7 +141,7 @@ write_collate <- function(package, path, trace = TRUE){
   }
   
   if(test.change){
-    write_description(package, path = path, newfile = file.description)
+    writeDescription(package, path = path, newfile = file.description)
     if(trace){cat("\n")}
   }
   return(invisible(TRUE))
@@ -150,17 +150,17 @@ write_collate <- function(package, path, trace = TRUE){
 #' @title write date field
 #' @description write the date field in the DESCRIPTION file of a package
 #' 
-#' @inheritParams read_description
+#' @inheritParams readDescription
 #' @param trace should the execution of the function be traced
 #' 
 #' @examples 
 #' \dontrun{
-#' write_date("butils", path = path_gitHub())
+#' writeDate("butils", path = pathGitHub())
 #' }
-write_date <- function(package, path, trace = TRUE){
+writeDate <- function(package, path, trace = TRUE){
  
   ## read description file
-  file.description <- read_description(package, path = path)
+  file.description <- readDescription(package, path = path)
   indexLine <- grep("Date:",file.description)
   
   newDate <- paste0("Date: ",format(Sys.time(), "%Y-%m-%d"))
@@ -170,7 +170,7 @@ write_date <- function(package, path, trace = TRUE){
   }else if(file.description[indexLine] != newDate){
     if(trace){cat(">> update \'Date\' field in the DESCRIPTION file (",newDate,")")}
     file.description[indexLine] <- newDate
-    write_description(package, path = path, newfile = file.description)
+    writeDescription(package, path = path, newfile = file.description)
     if(trace){cat("\n")}
   }
   

@@ -9,11 +9,11 @@
 #' 
 #' @keywords function url
 #' @examples 
-#' read_htmlLinks("https://cran.r-project.org/")
-#' read_htmlLinks("https://github.com/bozenne/BuyseTest")
+#' readHtmlLinks("https://cran.r-project.org/")
+#' readHtmlLinks("https://github.com/bozenne/BuyseTest")
 #' 
 #' @export
-read_htmlLinks <- function(x, ...){
+readHtmlLinks <- function(x, ...){
   # pipeR:::`%>>%` will be faster than rvest:::`%>%`
   
   content <- xml2::read_html(x,...)
