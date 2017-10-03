@@ -1,3 +1,4 @@
+## * readDescription
 #' @title Load description file
 #' @description Extract the description file of a package
 #' 
@@ -58,6 +59,7 @@ readDescription <- function(package, path, field = NULL,
   
 }
 
+## * writeDescription
 #' @title Update description file
 #' @description Overwrite the description file of a package
 #' 
@@ -84,7 +86,7 @@ writeDescription <- function(package, path, newfile, trace = TRUE){
   return(invisible(TRUE))
 }
 
-
+## * writeCollate
 #' @title write cpllate field
 #' @description write thecpllate field in the DESCRIPTION file of a package
 #' 
@@ -147,6 +149,7 @@ writeCollate <- function(package, path, trace = TRUE){
   return(invisible(TRUE))
 }
 
+## * writeDate
 #' @title write date field
 #' @description write the date field in the DESCRIPTION file of a package
 #' 

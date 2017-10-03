@@ -1,3 +1,4 @@
+## * cleanDir
 #' @title Remove directory
 #' @description Remove all files from a given directory
 #'
@@ -41,7 +42,7 @@ cleanDir <- function(dir.name,test=TRUE, trace = TRUE){
   return(invisible(list_files))
 }
 
-
+## * pathGitHub
 #' @title Find GitHub directory
 #' 
 #' @description Localise the github directory on linux or windows OS.
