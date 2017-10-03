@@ -3,9 +3,9 @@
 ## author: Brice Ozenne
 ## created: okt  3 2017 (09:55) 
 ## Version: 
-## last-updated: okt  3 2017 (15:38) 
+## last-updated: okt  3 2017 (16:14) 
 ##           By: Brice Ozenne
-##     Update #: 90
+##     Update #: 91
 #----------------------------------------------------------------------
 ## 
 ### Commentary: 
@@ -36,6 +36,7 @@
 #' res$functionNames
 #' res$argByFunction
 #' }
+#' @export
 listDocArgs <- function(dir,trace=TRUE){
   
     dir.man <- file.path(dir,"man")
