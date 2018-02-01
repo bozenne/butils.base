@@ -64,19 +64,20 @@ pathGitHub <- function(user = NULL){
       user <- Sys.info()["login"]
     }else stop("dir.gitHub: please specify the user \n")
   }
-  
+      
   if(Sys.info()["sysname"] == "Linux"){
-    dir <- file.path("/home",user,"GitHub")
+      dir <- c(file.path("/home",user,"GitHub"),
+               file.path("/home",user,"Documents","GitHub"))
   }else if(Sys.info()["sysname"] == "Windows"){
     dir <- file.path("C:/Users",user,"Documents","GitHub")
   }else{
     stop("only implemented for linux and windows \n")
   }
   
-  if(dir.exists(dir)){
-    return(dir) 
-  }else{
-    stop("dir.gitHub: no GitHub directory found \n")
-  }
+    if(any(dir.exists(dir))){
+        return(dir[dir.exists(dir)][1]) 
+    }else{
+        stop("dir.gitHub: no GitHub directory found \n")
+    }
   
 }
