@@ -2,16 +2,18 @@
 #' 
 #' @description Source all the R and Cpp file contain in a package
 #' 
-#' @param name the name of the package
-#' @param path the path to the directory containing the package
-#' @param r.package should the related R package be loaded
-#' @param r.code should all the .R be sourced
-#' @param r.order.collate should the R files be sourced in the order indicate by collate
-#' @param onAttach source the .onAttach function if it is present in the current environment
-#' @param onLoad source the .onLoad function if it is present in the current environment
-#' @param c.code should all the .cpp file be source (using Rcpp::sourceCpp)
-#' @param rebuild Force a rebuild of the shared library (from Rcpp:::sourceCpp).
-#' @param warning should a warning be displayed if some of the R files are not sourced
+#' @param name [character] The name of the package.
+#' @param path [character] The path to the directory containing the package.
+#' @param r.package [logical] Should the related R package be loaded.
+#' @param field [character vector] which type of dependency should be loaded?
+#' Only active if \code{r.package} it \code{TRUE}.
+#' @param r.code [logical] Should all the .R be sourced.
+#' @param r.order.collate [logical] Should the R files be sourced in the order indicate by collate.
+#' @param onAttach [logical] Source the .onAttach function if it is present in the current environment.
+#' @param onLoad [logical] Source the .onLoad function if it is present in the current environment.
+#' @param c.code [logical] Should all the .cpp file be source (using Rcpp::sourceCpp).
+#' @param rebuild [logical] Force a rebuild of the shared library (from Rcpp:::sourceCpp).
+#' @param warning [logical] Should a warning be displayed if some of the R files are not sourced.
 #' 
 #' @seealso \code{\link{pathGitHub}}
 #'
@@ -20,47 +22,19 @@
 #' package.source("riskRegression")
 #' @export
 sourcePackage <- function(name, path = pathGitHub(), 
-                          r.package = TRUE,
+                          r.package = TRUE, field = c("Imports","Depends"),
                           r.code = TRUE, r.order.collate = FALSE, onAttach = TRUE, onLoad = TRUE,
                           c.code = FALSE, rebuild = FALSE,
                           warning = TRUE){
   
-  validPath(path, type = "dir", method = "package.source")
-  validPath(file.path(path, name), type = "dir", method = "package.source")
-  if(r.package){
-    
-    if(identical(r.package,TRUE)){r.package <- c("Imports","Depends","Suggests")}
-    
-    validCharacter(r.package, valid.length = NULL, valid.values = c("Imports","Depends","Suggests"))
-    
-    packageToLoad <- NULL
-    if("Imports" %in% r.package){
-      packageToLoad <- c(packageToLoad,
-                         readDescription(name, path = path, field = "Imports", rm.comma = TRUE, rm.blanck = TRUE)
-      )
+
+    if(r.package){
+        packageToLoad   <- dependencyPackage(name = name, path = path, field = field)   
+        lapply(packageToLoad, require, character.only = TRUE)
+    }else{
+        validPath(path, type = "dir", method = "package.source")
+        validPath(file.path(path, name), type = "dir", method = "package.source")
     }
-    if("Depends" %in% r.package){
-      packageToLoad <- c(packageToLoad,
-                         readDescription(name, path = path, field = "Depends", rm.comma = TRUE, rm.blanck = TRUE)
-      )
-    }
-    if("Suggests" %in% r.package){
-      packageToLoad <- c(packageToLoad,
-                         readDescription(name, path = path, field = "Suggests", rm.comma = TRUE, rm.blanck = TRUE)
-      )
-    }
-    
-    ## remove version in parenthesis
-    packageToLoad <- gsub( " *\\(.*?\\) *", "", packageToLoad)
-    
-    ## remove space
-    packageToLoad <- gsub( "^\\s+|\\s+$", "", packageToLoad)
-    
-    ##
-    packageToLoad <- setdiff(packageToLoad, "R")
-    
-    lapply(packageToLoad, require, character.only = TRUE)
-  }
   
   if(r.code){
     validPath(file.path(path, name, "R"), type = "dir", method = "package.source")

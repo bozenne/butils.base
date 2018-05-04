@@ -3,9 +3,9 @@
 ## author: Brice Ozenne
 ## created: okt  3 2017 (09:55) 
 ## Version: 
-## last-updated: okt  3 2017 (17:47) 
+## last-updated: feb  6 2018 (09:25) 
 ##           By: Brice Ozenne
-##     Update #: 116
+##     Update #: 122
 #----------------------------------------------------------------------
 ## 
 ### Commentary: 
@@ -74,8 +74,15 @@ listDocArgs <- function(dir,trace=TRUE){
 
         name.tempo <- ls.sections$usage[[1]]
         for(iFunction in vec.tempo){
-           name.tempo <- sub(iFunction,"",name.tempo, fixed = TRUE)
+            name.tempo <- sub(iFunction,"",name.tempo, fixed = TRUE)
         }
+        # handle S3 methods
+        name.tempo <- gsub("\\method{","",name.tempo, fixed = TRUE)
+        name.tempo <- gsub("}{",".",name.tempo, fixed = TRUE)
+        name.tempo <- gsub("}","",name.tempo, fixed = TRUE)
+        name.tempo <- gsub(" <- value","<-",name.tempo, fixed = TRUE)
+
+        
         function.name <- strsplit(name.tempo, split = "\n", fixed = TRUE)[[1]]
         Ufunction.name <- paste(function.name,collapse = " | ")
 

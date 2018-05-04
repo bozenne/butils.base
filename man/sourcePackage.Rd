@@ -4,30 +4,34 @@
 \alias{sourcePackage}
 \title{Source a package directory}
 \usage{
-sourcePackage(name, path = pathGitHub(), r.package = TRUE, r.code = TRUE,
-  r.order.collate = FALSE, onAttach = TRUE, onLoad = TRUE,
-  c.code = FALSE, rebuild = FALSE, warning = TRUE)
+sourcePackage(name, path = pathGitHub(), r.package = TRUE,
+  field = c("Imports", "Depends"), r.code = TRUE, r.order.collate = FALSE,
+  onAttach = TRUE, onLoad = TRUE, c.code = FALSE, rebuild = FALSE,
+  warning = TRUE)
 }
 \arguments{
-\item{name}{the name of the package}
+\item{name}{[character] The name of the package.}
 
-\item{path}{the path to the directory containing the package}
+\item{path}{[character] The path to the directory containing the package.}
 
-\item{r.package}{should the related R package be loaded}
+\item{r.package}{[logical] Should the related R package be loaded.}
 
-\item{r.code}{should all the .R be sourced}
+\item{field}{[character vector] which type of dependency should be loaded?
+Only active if \code{r.package} it \code{TRUE}.}
 
-\item{r.order.collate}{should the R files be sourced in the order indicate by collate}
+\item{r.code}{[logical] Should all the .R be sourced.}
 
-\item{onAttach}{source the .onAttach function if it is present in the current environment}
+\item{r.order.collate}{[logical] Should the R files be sourced in the order indicate by collate.}
 
-\item{onLoad}{source the .onLoad function if it is present in the current environment}
+\item{onAttach}{[logical] Source the .onAttach function if it is present in the current environment.}
 
-\item{c.code}{should all the .cpp file be source (using Rcpp::sourceCpp)}
+\item{onLoad}{[logical] Source the .onLoad function if it is present in the current environment.}
 
-\item{rebuild}{Force a rebuild of the shared library (from Rcpp:::sourceCpp).}
+\item{c.code}{[logical] Should all the .cpp file be source (using Rcpp::sourceCpp).}
 
-\item{warning}{should a warning be displayed if some of the R files are not sourced}
+\item{rebuild}{[logical] Force a rebuild of the shared library (from Rcpp:::sourceCpp).}
+
+\item{warning}{[logical] Should a warning be displayed if some of the R files are not sourced.}
 }
 \description{
 Source all the R and Cpp file contain in a package
