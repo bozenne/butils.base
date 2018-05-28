@@ -3,9 +3,9 @@
 ## Author: Brice Ozenne
 ## Created: maj  4 2018 (09:38) 
 ## Version: 
-## Last-Updated: maj  4 2018 (09:50) 
+## Last-Updated: maj  4 2018 (09:54) 
 ##           By: Brice Ozenne
-##     Update #: 7
+##     Update #: 8
 ##----------------------------------------------------------------------
 ## 
 ### Commentary: 
@@ -23,6 +23,7 @@
 ##' @param field [character vector] which type of dependency should be considered?
 ##' 
 ##' @return character vector containing the names of the packages
+##' @export
 dependencyPackage <- function(name, path, field = c("Imports","Depends","Suggests")){
 
     field <- match.arg(field, choices = c("Imports","Depends","Suggests"), several.ok = TRUE)

@@ -4,7 +4,7 @@
 \alias{sourcePackage}
 \title{Source a package directory}
 \usage{
-sourcePackage(name, path = pathGitHub(), r.package = TRUE,
+sourcePackage(name, path = pathGitHub(), trace = FALSE, r.package = TRUE,
   field = c("Imports", "Depends"), r.code = TRUE, r.order.collate = FALSE,
   onAttach = TRUE, onLoad = TRUE, c.code = FALSE, rebuild = FALSE,
   warning = TRUE)
@@ -13,6 +13,8 @@ sourcePackage(name, path = pathGitHub(), r.package = TRUE,
 \item{name}{[character] The name of the package.}
 
 \item{path}{[character] The path to the directory containing the package.}
+
+\item{trace}{[logical]  Should the execution of the R and cpp files be traced?}
 
 \item{r.package}{[logical] Should the related R package be loaded.}
 

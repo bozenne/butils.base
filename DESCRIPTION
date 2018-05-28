@@ -2,7 +2,7 @@ Package: butils.base
 Type: Package
 Title: Tools to source R code or install R packages
 Version: 1.1
-Date: 2018-05-04
+Date: 2018-05-28
 Author: Brice Ozenne[aut]
 Maintainer: brice ozenne <brice.ozenne@orange.fr>
 Description: Tools to source R code or install R packages.
@@ -15,6 +15,7 @@ Depends:
 Imports:
     data.table,
     methods,
+    pbapply,
     pipeR,
     Rcpp,
     roxygen2,

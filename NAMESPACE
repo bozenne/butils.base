@@ -3,6 +3,7 @@
 export(buildPackage)
 export(countCppArgs)
 export(declareRoutineC)
+export(dependencyPackage)
 export(installGithubCommit)
 export(listDocArgs)
 export(pathGitHub)

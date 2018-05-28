@@ -4,6 +4,7 @@
 #' 
 #' @param name [character] The name of the package.
 #' @param path [character] The path to the directory containing the package.
+#' @param trace [logical]  Should the execution of the R and cpp files be traced?
 #' @param r.package [logical] Should the related R package be loaded.
 #' @param field [character vector] which type of dependency should be loaded?
 #' Only active if \code{r.package} it \code{TRUE}.
@@ -21,7 +22,7 @@
 #' package.source("butils")
 #' package.source("riskRegression")
 #' @export
-sourcePackage <- function(name, path = pathGitHub(), 
+sourcePackage <- function(name, path = pathGitHub(), trace = FALSE,
                           r.package = TRUE, field = c("Imports","Depends"),
                           r.code = TRUE, r.order.collate = FALSE, onAttach = TRUE, onLoad = TRUE,
                           c.code = FALSE, rebuild = FALSE,
@@ -88,9 +89,23 @@ sourcePackage <- function(name, path = pathGitHub(),
 
     
     
-    ## SOURCE
-    res <- lapply(file.path(path,name,"R",fileNames), source)
-    
+    ## ** source R code
+    if(trace == 0){
+        res <- lapply(file.path(path,name,"R",fileNames), source)
+    }else if(trace==1){
+        cat("R code: \n")
+        res <- pbapply::pblapply(file.path(path,name,"R",fileNames), source)
+    }else{
+        cat("R code: \n")
+        res <- lapply(file.path(path,name,"R",fileNames), function(iFile){
+            cat("  > ",iFile," ",sep = "")
+            source(iFile)
+            cat("\n")
+        })
+        cat("\n")
+    }
+
+    ## ** run .onAttach function
     .onAttach <- try(get(".onAttach", envir = globalenv()), silent = TRUE)
     if(onAttach){
         if(class(.onAttach) == "function"){
@@ -101,7 +116,7 @@ sourcePackage <- function(name, path = pathGitHub(),
         }
     }
     
-    
+    ## ** run .onLoad function
     .onLoad <- try(get(".onLoad", envir = globalenv()), silent = TRUE)
     if(onLoad){
         if(class(.onLoad) == "function"){
@@ -112,20 +127,36 @@ sourcePackage <- function(name, path = pathGitHub(),
         }
     }
   }
+
+    ## ** source C++ code
+    test.src <- try(validPath(file.path(path, name, "src"), type = "dir", method = "package.source"), silent = TRUE)
+    if(c.code && identical(test.src,TRUE)){
     
-  test.src <- try(validPath(file.path(path, name, "src"), type = "dir", method = "package.source"), silent = TRUE)
-  if(c.code && identical(test.src,TRUE)){
-    
-    fileNames <- list.files(file.path(path, name, "src"))
-    if(length(fileNames)>0){
-    fileExts <- tools::file_path_sans_ext(fileNames)
-    indexC <- grep("cpp", x = tools::file_ext(fileNames), 
-                   fixed = FALSE)
-    lapply(file.path(path,name,"src",setdiff(fileNames[indexC],"RcppExports.cpp")), 
-           Rcpp::sourceCpp, 
-           rebuild = rebuild)
+        fileNames <- list.files(file.path(path, name, "src"))
+        if(length(fileNames)>0){
+            fileExts <- tools::file_path_sans_ext(fileNames)
+            indexC <- grep("cpp", x = tools::file_ext(fileNames), 
+                           fixed = FALSE)
+            if(trace==0){
+                lapply(file.path(path,name,"src",setdiff(fileNames[indexC],"RcppExports.cpp")), 
+                       Rcpp::sourceCpp, 
+                       rebuild = rebuild) 
+            }else if(trace == 1){
+                cat("C++ code: \n")
+                pbapply::pblapply(file.path(path,name,"src",setdiff(fileNames[indexC],"RcppExports.cpp")), 
+                                  Rcpp::sourceCpp, 
+                                  rebuild = rebuild)
+            }else{
+                cat("C++ code: \n")
+                lapply(file.path(path,name,"src",setdiff(fileNames[indexC],"RcppExports.cpp")),
+                       function(iFile){
+                           cat("  > ",iFile," ",sep = "")
+                           Rcpp::sourceCpp(iFile, rebuild = rebuild)
+                           cat("\n")
+                       })
+            }
+        }
     }
-  }
   
   return(invisible(TRUE))
   
