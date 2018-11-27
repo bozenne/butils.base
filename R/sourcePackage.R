@@ -1,6 +1,7 @@
+## * sourcePackage (documentation)
 #' @title Source a package directory
-#' 
 #' @description Source all the R and Cpp file contain in a package
+#' @name sourcePackage
 #' 
 #' @param name [character] The name of the package.
 #' @param path [character] The path to the directory containing the package.
@@ -18,9 +19,15 @@
 #' 
 #' @seealso \code{\link{pathGitHub}}
 #'
-#' @examples 
-#' package.source("butils")
-#' package.source("riskRegression")
+#' @examples
+#' \dontrun{
+#' sourcePackage("butils")
+#' sourcePackage("riskRegression")
+#' }
+#'
+
+## * sourcePackage (code)
+#' @rdname sourcePackage
 #' @export
 sourcePackage <- function(name, path = pathGitHub(), trace = FALSE,
                           r.package = TRUE, field = c("Imports","Depends"),

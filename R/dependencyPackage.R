@@ -3,9 +3,9 @@
 ## Author: Brice Ozenne
 ## Created: maj  4 2018 (09:38) 
 ## Version: 
-## Last-Updated: maj  4 2018 (09:54) 
+## Last-Updated: nov 27 2018 (10:27) 
 ##           By: Brice Ozenne
-##     Update #: 8
+##     Update #: 10
 ##----------------------------------------------------------------------
 ## 
 ### Commentary: 
@@ -23,6 +23,11 @@
 ##' @param field [character vector] which type of dependency should be considered?
 ##' 
 ##' @return character vector containing the names of the packages
+##'
+##' @examples
+##' \dontrun{
+##'   dependencyPackage("lavaSearch2", path = pathGitHub())
+##' }
 ##' @export
 dependencyPackage <- function(name, path, field = c("Imports","Depends","Suggests")){
 

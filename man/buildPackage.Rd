@@ -60,8 +60,9 @@ exportPattern("^[^\\.]") : exporte toutes les fonctions ne commencant pas par un
 exportPattern("^[[:alpha:]]+") : exporte toutes les fonctions commencant par une lettre
 }
 \examples{
+\dontrun{
 buildPackage("butils")
-
+}
 }
 \keyword{function}
 \keyword{package}

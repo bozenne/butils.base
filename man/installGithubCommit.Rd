@@ -4,36 +4,33 @@
 \alias{installGithubCommit}
 \title{Install commit}
 \usage{
-installGithubCommit(repo, ref = "master", subdir = NULL,
-  host = "https://api.github.com", temporary = TRUE, force = FALSE,
-  quiet = FALSE, ...)
+installGithubCommit(repo, ref = "master", temporary = TRUE,
+  trace = TRUE, ...)
 }
 \arguments{
-\item{repo}{Repository address in the format username/repo}
+\item{repo}{Repository address in the format username/repo. See the documentation of \code{devtools::install_github}.}
 
 \item{ref}{Desired git reference. See the documentation of \code{devtools::install_github}.}
 
-\item{subdir}{Subdirectory within repo that contains the R package.  See the documentation of \code{devtools::install_github}.}
+\item{temporary}{Should the package be installed under a newname, i.e. adding \code{Tempo} to the name of the package?}
 
-\item{host}{GitHub API host to use. See the documentation of \code{devtools::install_github}.}
+\item{trace}{should the execution of the function be trace?}
 
-\item{temporary}{Should the package be installed under a newname, i.e. adding \code{Tempo} to the name of the package}
-
-\item{force}{Not sure what it is !!!}
-
-\item{quiet}{Not sure what it is !!!}
-
-\item{...}{additional arguments to be passed to \code{devtools::install_packages} or \code{devtools:::install}}
+\item{...}{additional arguments to be passed to \code{devtools::install}}
 }
 \description{
-Install a specific commit of a package, possibly under a temporary name
+Install a specific commit of a package, possibly under a temporary name.
+}
+\details{
+This function is essentially a copy of the function \code{install_remote} from the package remotes,
+with one additional argument, \code{temporary}, that enable to install the package under an other name.
+This can be convinient to track a change between package versions.
 }
 \examples{
 \dontrun{
 commit <- readGithubCommit("bozenne/BuyseTest", seq.commit = 1)[1,"commits"]
 installGithubCommit("bozenne/BuyseTest", ref = commit)
 }
-
 }
 \keyword{function}
 \keyword{github}

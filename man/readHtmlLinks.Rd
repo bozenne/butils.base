@@ -4,10 +4,12 @@
 \alias{readHtmlLinks}
 \title{links of a url page}
 \usage{
-readHtmlLinks(x, ...)
+readHtmlLinks(link, xpath = ".//a", ...)
 }
 \arguments{
-\item{x}{the url page. Character.}
+\item{link}{[character] the url page.}
+
+\item{xpath}{[character] a string used to extract the relevant expression.}
 
 \item{...}{additional arguments to be passed to \code{read_html}.}
 }

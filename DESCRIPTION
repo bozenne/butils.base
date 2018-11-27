@@ -1,25 +1,22 @@
 Package: butils.base
 Type: Package
 Title: Tools to source R code or install R packages
-Version: 1.1
-Date: 2018-05-28
+Version: 1.2
+Date: 2018-11-27
 Author: Brice Ozenne[aut]
 Maintainer: brice ozenne <brice.ozenne@orange.fr>
 Description: Tools to source R code or install R packages.
 License: GPL-3
 Depends:
     R (>= 2.10),
+	data.table,
     devtools,
-    selectr,
-    XML
+	Rcpp	
 Imports:
-    data.table,
+    curl,
     methods,
     pbapply,
-    pipeR,
-    Rcpp,
-    roxygen2,
-    rvest,
+	roxygen2,
     stats,
     stringr,
     tools,
@@ -28,4 +25,4 @@ Imports:
     zoo
 LazyLoad: yes
 NeedsCompilation: no
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0.9000

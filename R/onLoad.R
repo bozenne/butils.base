@@ -4,19 +4,10 @@
   options(error = function()revTraceback(max.lines = 5))
 }
 
-
-`%||%` <- get("%||%", envir = asNamespace("devtools"), inherits = FALSE)
-different_sha <- get("different_sha", envir = asNamespace("devtools"), inherits = FALSE)
-github_remote <- get("github_remote", envir = asNamespace("devtools"), inherits = FALSE)
-github_resolve_ref <- get("github_resolve_ref", envir = asNamespace("devtools"), inherits = FALSE)
-install_packages <- get("install_packages", envir = asNamespace("devtools"), inherits = FALSE)
-is.remote <- get("is.remote", envir = asNamespace("devtools"), inherits = FALSE)
-is_windows <- get("is_windows", envir = asNamespace("devtools"), inherits = FALSE)
-local_sha <- get("local_sha", envir = asNamespace("devtools"), inherits = FALSE)
-parse_git_repo <- get("parse_git_repo", envir = asNamespace("devtools"), inherits = FALSE)
-remote_download <- get("remote_download", envir = asNamespace("devtools"), inherits = FALSE)
-remote_metadata <- get("remote_metadata", envir = asNamespace("devtools"), inherits = FALSE)
-remote_package_name <- get("remote_package_name", envir = asNamespace("devtools"), inherits = FALSE)
-remote_sha <- get("remote_sha", envir = asNamespace("devtools"), inherits = FALSE)
-source_pkg <- get("source_pkg", envir = asNamespace("devtools"), inherits = FALSE)
+## installGithubCommit
+`remotes_parse_git_repo` <- get("parse_git_repo", envir = asNamespace("remotes"), inherits = FALSE)
+`remotes_github_commit` <- get("github_commit", envir = asNamespace("remotes"), inherits = FALSE)
+`remotes_build_url` <- get("build_url", envir = asNamespace("remotes"), inherits = FALSE)
+`remotes_download` <- get("download", envir = asNamespace("remotes"), inherits = FALSE)
+`remotes_source_pkg` <- get("source_pkg", envir = asNamespace("remotes"), inherits = FALSE)
 

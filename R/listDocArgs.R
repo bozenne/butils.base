@@ -3,9 +3,9 @@
 ## author: Brice Ozenne
 ## created: okt  3 2017 (09:55) 
 ## Version: 
-## last-updated: feb  6 2018 (09:25) 
+## last-updated: nov 27 2018 (12:18) 
 ##           By: Brice Ozenne
-##     Update #: 122
+##     Update #: 125
 #----------------------------------------------------------------------
 ## 
 ### Commentary: 
@@ -15,10 +15,11 @@
 ## 
 ### Code:
 
-## * listDocArgs
+## * listDocArgs (documentation)
 #' @title Get all the arguments from the Rd files
 #' @description Create a file in inst containing the description of all the arguments from the Rd file of a package
-#'	
+#' @name listDocArgs
+#' 
 #' @param dir the path to the directory containing the R package
 #' @param trace should the execution of the function be traced
 #'
@@ -36,6 +37,9 @@
 #' res$functionNames
 #' res$argByFunction
 #' }
+#'
+
+## * listDocArgs (code)
 #' @export
 listDocArgs <- function(dir,trace=TRUE){
   
@@ -58,7 +62,7 @@ listDocArgs <- function(dir,trace=TRUE){
     dt.argsdoc <- NULL
   
     if(trace){
-        pb <- txtProgressBar(max = n.files)
+        pb <- utils::txtProgressBar(max = n.files)
     }
   
     for(iter_file in 1:n.files){
@@ -109,7 +113,7 @@ listDocArgs <- function(dir,trace=TRUE){
         vec.Ufunction <- c(vec.Ufunction,Ufunction.name)
         dt.argsdoc <- rbind(dt.argsdoc, data.table::data.table(fct = Ufunction.name, args = vec.args, doc = vec.doc))
         if(trace){
-            setTxtProgressBar(pb, iter_file)
+            utils::setTxtProgressBar(pb, iter_file)
         }
     }
     if(trace){close(pb)}
@@ -182,7 +186,7 @@ extractSectionFromRD <- function(file){
     file.sections2 <- unname(sapply(file.sections2, gsub, pattern = "^\\n|\\n$", replacement = ""))
 
     ## export
-    out <- as.list(setNames(file.sections2, name.sections))
+    out <- as.list(stats::setNames(file.sections2, name.sections))
     return(out)        
 }
 

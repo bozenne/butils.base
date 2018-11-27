@@ -4,10 +4,10 @@
 \alias{sourcePackage}
 \title{Source a package directory}
 \usage{
-sourcePackage(name, path = pathGitHub(), trace = FALSE, r.package = TRUE,
-  field = c("Imports", "Depends"), r.code = TRUE, r.order.collate = FALSE,
-  onAttach = TRUE, onLoad = TRUE, c.code = FALSE, rebuild = FALSE,
-  warning = TRUE)
+sourcePackage(name, path = pathGitHub(), trace = FALSE,
+  r.package = TRUE, field = c("Imports", "Depends"), r.code = TRUE,
+  r.order.collate = FALSE, onAttach = TRUE, onLoad = TRUE,
+  c.code = FALSE, rebuild = FALSE, warning = TRUE)
 }
 \arguments{
 \item{name}{[character] The name of the package.}
@@ -39,8 +39,11 @@ Only active if \code{r.package} it \code{TRUE}.}
 Source all the R and Cpp file contain in a package
 }
 \examples{
-package.source("butils")
-package.source("riskRegression")
+\dontrun{
+sourcePackage("butils")
+sourcePackage("riskRegression")
+}
+
 }
 \seealso{
 \code{\link{pathGitHub}}

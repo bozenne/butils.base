@@ -5,8 +5,8 @@
 \title{Existing commits}
 \usage{
 readGithubCommit(repo, seq.commit = 1:5, rev.commit = FALSE,
-  keep.author = TRUE, keep.name = TRUE, keep.time = TRUE, trace = TRUE,
-  ...)
+  keep.author = TRUE, keep.name = TRUE, keep.time = TRUE,
+  trace = TRUE, ...)
 }
 \arguments{
 \item{repo}{Repository address in the format username/repo}
@@ -29,9 +29,9 @@ readGithubCommit(repo, seq.commit = 1:5, rev.commit = FALSE,
 Get the existing commits corresponding to a repo on Github
 }
 \examples{
-readGithubCommit("bozenne/BuyseTest")
-readGithubCommit("bozenne/BuyseTest",rev.commit = TRUE)
 
+readGithubCommit("bozenne/BuyseTest")
+readGithubCommit("bozenne/BuyseTest", rev.commit = TRUE)
 }
 \keyword{function}
 \keyword{github}

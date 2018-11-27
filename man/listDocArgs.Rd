@@ -29,4 +29,5 @@ res <- listDocArgs(file.path(pathGitHub(),"butils.base"))
 res$functionNames
 res$argByFunction
 }
+
 }
