@@ -3,8 +3,9 @@ Type: Package
 Title: Tools to source R code or install R packages
 Version: 1.2
 Date: 2018-11-27
-Author: Brice Ozenne[aut]
-Maintainer: brice ozenne <brice.ozenne@orange.fr>
+Authors@R: c(
+    person("Brice", "Ozenne", role = c("aut", "cre"), email = "brice.mh.ozenne@gmail.com", comment = c(ORCID = "0000-0001-9694-2956"))
+    )
 Description: Tools to source R code or install R packages.
 License: GPL-3
 Depends:
