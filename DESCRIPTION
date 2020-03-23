@@ -2,11 +2,12 @@ Package: butils.base
 Type: Package
 Title: Tools to source R code or install R packages
 Version: 1.2
-Date: 2018-11-27
+Date: 2020-03-23
 Authors@R: c(
     person("Brice", "Ozenne", role = c("aut", "cre"), email = "brice.mh.ozenne@gmail.com", comment = c(ORCID = "0000-0001-9694-2956"))
     )
 Description: Tools to source R code or install R packages.
+Encoding: UTF-8
 License: GPL-3
 Depends:
     R (>= 2.10),
@@ -26,4 +27,4 @@ Imports:
     zoo
 LazyLoad: yes
 NeedsCompilation: no
-RoxygenNote: 6.1.0.9000
+RoxygenNote: 6.1.1
