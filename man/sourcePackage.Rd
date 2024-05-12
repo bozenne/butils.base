@@ -48,6 +48,9 @@ Only active if \code{r.package} it \code{TRUE}.}
 \description{
 Source all the R and Cpp file contain in a package
 }
+\details{
+Used by emacs-config.
+}
 \examples{
 \dontrun{
 sourcePackage("butils")

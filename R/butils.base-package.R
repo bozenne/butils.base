@@ -4,5 +4,6 @@
 #' 
 #' @import devtools
 #' @import Rcpp
+#' @import data.table
 "_PACKAGE"
 

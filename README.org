@@ -1,6 +1,7 @@
 #+BEGIN_HTML
-<a href="https://travis-ci.org/bozenne/butils.base"><img src="https://travis-ci.org/bozenne/butils.base.svg?branch=master"></a>
 <a href="https://ci.appveyor.com/project/bozenne/butils.base"><img src="https://ci.appveyor.com/api/projects/status/github/bozenne/butils.base?svg=true" alt="Build status"></a>
 #+END_HTML
 
 * butils.base
+
+Tools to source R code or install R packages. Not really useful since the R package devtools is a more 

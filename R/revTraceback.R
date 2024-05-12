@@ -6,6 +6,7 @@
 #' @inheritParams base::traceback
 #' @param trace should the call stacks be output
 #'
+#' @details Used by emacs-config.
 
 ## * revTraceback (code)
 #' @export

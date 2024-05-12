@@ -11,6 +11,7 @@ Encoding: UTF-8
 License: GPL-3
 Depends:
     R (>= 2.10),
+    data.table,
     devtools,
     Rcpp	
 Imports:
@@ -32,12 +33,17 @@ Collate:
     'buildPackage.R'
     'butils.base-package.R'
     'dependencyPackage.R'
+    'DIM.R'
     'extractRchunk.R'
     'installGithubCommit.R'
     'listDocArgs.R'
+    'NAMES.R'
+    'object2script.R'
     'pathGitHub.R'
     'readGithubCommit.R'
     'revTraceback.R'
+    'sinkDirectory.R'
     'sourcePackage.R'
+    'UNIQUE.R'
     'utils-HTML.R'
     'valid.R'

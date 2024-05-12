@@ -16,6 +16,7 @@
 #' @param rebuild [logical] Force a rebuild of the shared library (from Rcpp:::sourceCpp).
 #' @param warning [logical] Should a warning be displayed if some of the R files are not sourced.
 #' 
+#' @details Used by emacs-config.
 #' @seealso \code{\link{pathGitHub}}
 #'
 #' @examples

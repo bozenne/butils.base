@@ -25,3 +25,6 @@ revTraceback(
 \description{
 Same as \code{base::traceback} but in reverse order
 }
+\details{
+Used by emacs-config.
+}
