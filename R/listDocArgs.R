@@ -3,9 +3,9 @@
 ## author: Brice Ozenne
 ## created: okt  3 2017 (09:55) 
 ## Version: 
-## last-updated: nov 27 2018 (12:18) 
+## last-updated: May 12 2024 (11:28) 
 ##           By: Brice Ozenne
-##     Update #: 125
+##     Update #: 126
 #----------------------------------------------------------------------
 ## 
 ### Commentary: 
@@ -28,7 +28,7 @@
 #' \item argByFunction name of the arguments of the functions/methods that are documented.
 #' \item docByFunction description of the arguments of the functions/methods that are documented.
 #' \item functionNames name of the functions/methods that are documented.
-#' \item dtAll data.table object gathering function names, argument names, and description of the arguments
+#' \item dfAll data.frame object gathering function names, argument names, and description of the arguments
 #' }
 #' 
 #' @examples
@@ -59,7 +59,7 @@ listDocArgs <- function(dir,trace=TRUE){
     ls.doc <- NULL
     vec.function <- NULL
     vec.Ufunction <- NULL
-    dt.argsdoc <- NULL
+    df.argsdoc <- NULL
   
     if(trace){
         pb <- utils::txtProgressBar(max = n.files)
@@ -111,7 +111,7 @@ listDocArgs <- function(dir,trace=TRUE){
         ls.doc <- c(ls.doc, list(vec.doc))
         vec.function <- c(vec.function,function.name)
         vec.Ufunction <- c(vec.Ufunction,Ufunction.name)
-        dt.argsdoc <- rbind(dt.argsdoc, data.table::data.table(fct = Ufunction.name, args = vec.args, doc = vec.doc))
+        df.argsdoc <- rbind(df.argsdoc, data.frame(fct = Ufunction.name, args = vec.args, doc = vec.doc))
         if(trace){
             utils::setTxtProgressBar(pb, iter_file)
         }
@@ -124,7 +124,7 @@ listDocArgs <- function(dir,trace=TRUE){
     return(list(argByFunction=ls.args,
                 docByFunction=ls.doc,
                 functionNames=vec.function,
-                dtAll=dt.argsdoc))
+                dfAll=df.argsdoc))
   
 }
 

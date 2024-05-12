@@ -11,14 +11,13 @@ Encoding: UTF-8
 License: GPL-3
 Depends:
     R (>= 2.10),
-	data.table,
     devtools,
-	Rcpp	
+    Rcpp	
 Imports:
     curl,
     methods,
     pbapply,
-	roxygen2,
+    roxygen2,
     stats,
     stringr,
     tools,
@@ -28,3 +27,17 @@ Imports:
 LazyLoad: yes
 NeedsCompilation: no
 RoxygenNote: 7.3.1
+Collate:
+    '0-onload.R'
+    'buildPackage.R'
+    'butils.base-package.R'
+    'dependencyPackage.R'
+    'extractRchunk.R'
+    'installGithubCommit.R'
+    'listDocArgs.R'
+    'pathGitHub.R'
+    'readGithubCommit.R'
+    'revTraceback.R'
+    'sourcePackage.R'
+    'utils-HTML.R'
+    'valid.R'

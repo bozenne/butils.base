@@ -23,4 +23,5 @@ Extract the names of the dependences of a package.
 \dontrun{
   dependencyPackage("lavaSearch2", path = pathGitHub())
 }
+
 }

@@ -1,4 +1,4 @@
-## * readHtmlLinks
+## * readHtmlLinks (documentation)
 #' @title links of a url page
 #' 
 #' @description Get the links of a url page.
@@ -14,6 +14,8 @@
 #' readHtmlLinks("https://cran.r-project.org/")
 #' readHtmlLinks("https://github.com/bozenne/BuyseTest")
 #' 
+
+## * readHtmlLinks (code)
 #' @export
 readHtmlLinks <- function(link, xpath = ".//a", ...){
 

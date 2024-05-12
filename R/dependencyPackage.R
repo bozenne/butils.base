@@ -3,9 +3,9 @@
 ## Author: Brice Ozenne
 ## Created: maj  4 2018 (09:38) 
 ## Version: 
-## Last-Updated: nov 27 2018 (10:27) 
+## Last-Updated: May 12 2024 (11:30) 
 ##           By: Brice Ozenne
-##     Update #: 10
+##     Update #: 12
 ##----------------------------------------------------------------------
 ## 
 ### Commentary: 
@@ -15,6 +15,7 @@
 ## 
 ### Code:
 
+## * dependencyPackage (documentation)
 ##' @title Extract the Names of the Dependences of a Package
 ##' @description Extract the names of the dependences of a package.
 ##' 
@@ -28,6 +29,9 @@
 ##' \dontrun{
 ##'   dependencyPackage("lavaSearch2", path = pathGitHub())
 ##' }
+##'
+
+## * dependencyPackage (code)
 ##' @export
 dependencyPackage <- function(name, path, field = c("Imports","Depends","Suggests")){
 

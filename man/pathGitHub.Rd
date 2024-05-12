@@ -16,6 +16,5 @@ Localise the github directory on linux or windows OS.
 \dontrun{
 pathGitHub()
 }
+
 }
-\keyword{function}
-\keyword{package}

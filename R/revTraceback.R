@@ -1,5 +1,4 @@
-# {{{ revTraceback
-
+## * revTraceback (documentation)
 #' @title Get and Print Call Stacks (reverse order)
 #' 
 #' @description Same as \code{base::traceback} but in reverse order
@@ -7,6 +6,8 @@
 #' @inheritParams base::traceback
 #' @param trace should the call stacks be output
 #'
+
+## * revTraceback (code)
 #' @export
 revTraceback <- function (x = NULL,
                           max.lines = getOption("deparse.max.lines"),
@@ -40,4 +41,3 @@ revTraceback <- function (x = NULL,
     }
     invisible(x)
 }
-# }}}

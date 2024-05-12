@@ -36,9 +36,7 @@ readGithubCommit(
 Get the existing commits corresponding to a repo on Github
 }
 \examples{
-
 readGithubCommit("bozenne/BuyseTest")
 readGithubCommit("bozenne/BuyseTest", rev.commit = TRUE)
+
 }
-\keyword{function}
-\keyword{github}

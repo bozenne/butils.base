@@ -3,9 +3,9 @@
 ## author: Brice Ozenne
 ## created: okt  3 2017 (12:01) 
 ## Version: 
-## last-updated: nov 27 2018 (12:06) 
+## last-updated: May 12 2024 (11:51) 
 ##           By: Brice Ozenne
-##     Update #: 40
+##     Update #: 45
 #----------------------------------------------------------------------
 ## 
 ### Commentary: 
@@ -18,7 +18,6 @@
 ## * readGithubCommit (documentation)
 #' @title Existing commits
 #' @description Get the existing commits corresponding to a repo on Github
-#' @name readGithubCommit
 #'
 #' @param repo Repository address in the format username/repo
 #' @param seq.commit the sequence of commit to return
@@ -29,15 +28,12 @@
 #' @param trace should the progression in geting the name/time of the commit be displayed
 #' @param ... additional arguments to be passed to \code{read_html}.
 #'  
-#' @keywords function github
 #' @examples
-#' 
 #' readGithubCommit("bozenne/BuyseTest")
 #' readGithubCommit("bozenne/BuyseTest", rev.commit = TRUE)
-
+#' 
 
 ## * readGithubCommit (code)
-#' @rdname readGithubCommit
 #' @export
 readGithubCommit <- function(repo, seq.commit = 1:5, rev.commit = FALSE, 
                              keep.author = TRUE, keep.name = TRUE, keep.time = TRUE,  trace = TRUE, ...){

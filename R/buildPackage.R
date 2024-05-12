@@ -1,7 +1,6 @@
 ## * buildPackage (documentation)
 #' @title Integrative function for building packages
 #' @description  Convenient way to compile, test or install a package
-#' @name buildPackage
 #' 
 #' @param package the name of the package
 #' @param version the version of the package
@@ -27,15 +26,12 @@
 #' exportPattern("^[^\\.]") : exporte toutes les fonctions ne commencant pas par un point
 #' exportPattern("^[[:alpha:]]+") : exporte toutes les fonctions commencant par une lettre
 #' 
-#' @keywords function package
-#' 
 #' @examples
 #' \dontrun{
 #' buildPackage("butils")
 #' }
 
 ## * buildPackage (code)
-#' @rdname buildPackage
 #' @export
 buildPackage <- function(package, version = NULL, path = pathGitHub(), 
                          register.c.routine = FALSE, compile.attributes = TRUE, update.collate = FALSE, update.date = TRUE, roxygenise = TRUE,
@@ -111,7 +107,7 @@ buildPackage <- function(package, version = NULL, path = pathGitHub(),
     if(clear.r.check){cleanDir(paste0(path.Wpackage,".Rcheck"), test = FALSE)}
     if(trace>=2)cat("\n")
   }
-  
+
   if(install){
     if(trace>=2)cat(">> install package \n")
     system(paste0("R CMD INSTALL ",options.install," ",packageVersion,"/",package))

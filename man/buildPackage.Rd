@@ -78,5 +78,3 @@ exportPattern("^[[:alpha:]]+") : exporte toutes les fonctions commencant par une
 buildPackage("butils")
 }
 }
-\keyword{function}
-\keyword{package}

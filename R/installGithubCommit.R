@@ -1,10 +1,7 @@
-
-## * installGithubCommit (Documentation)
+## * installGithubCommit (documentation)
 #' @title Install commit
-#' @name installGithubCommit
-#' 
 #' @description Install a specific commit of a package, possibly under a temporary name.
-#'
+#' 
 #' @param repo Repository address in the format username/repo. See the documentation of \code{devtools::install_github}.
 #' @param ref Desired git reference. See the documentation of \code{devtools::install_github}.
 #' @param temporary Should the package be installed under a newname, i.e. adding \code{Tempo} to the name of the package?
@@ -15,7 +12,6 @@
 #' with one additional argument, \code{temporary}, that enable to install the package under an other name.
 #' This can be convinient to track a change between package versions.
 #' 
-#' @keywords function github package
 #' @examples 
 #' \dontrun{
 #' commit <- readGithubCommit("bozenne/BuyseTest", seq.commit = 1)[1,"commits"]
@@ -23,7 +19,6 @@
 #' }
 
 ## * installGithubCommit (code)
-#' @rdname installGithubCommit
 #' @export
 installGithubCommit <- function (repo, ref = "master", temporary = TRUE, trace = TRUE, ...){
 

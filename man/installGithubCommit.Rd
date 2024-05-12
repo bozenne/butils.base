@@ -31,6 +31,3 @@ commit <- readGithubCommit("bozenne/BuyseTest", seq.commit = 1)[1,"commits"]
 installGithubCommit("bozenne/BuyseTest", ref = commit)
 }
 }
-\keyword{function}
-\keyword{github}
-\keyword{package}

@@ -3,9 +3,9 @@
 ## Author: Brice Ozenne
 ## Created: nov 27 2018 (10:24) 
 ## Version: 
-## Last-Updated: nov 27 2018 (10:32) 
+## Last-Updated: May 12 2024 (11:50) 
 ##           By: Brice Ozenne
-##     Update #: 2
+##     Update #: 6
 ##----------------------------------------------------------------------
 ## 
 ### Commentary: 
@@ -15,19 +15,19 @@
 ## 
 ### Code:
 
-## * pathGitHub
+## * pathGitHub (documentation)
 #' @title Find GitHub directory
-#' 
 #' @description Localise the github directory on linux or windows OS.
 #'
 #' @param user the name corresponding to the cession.
-#' 
-#' @keywords function package
 #' 
 #' @examples
 #' \dontrun{
 #' pathGitHub()
 #' }
+#'
+
+## * pathGitHub (code)
 #' @export
 pathGitHub <- function(user = NULL){
   

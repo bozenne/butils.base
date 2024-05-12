@@ -17,7 +17,7 @@ a list containing:
 \item argByFunction name of the arguments of the functions/methods that are documented.
 \item docByFunction description of the arguments of the functions/methods that are documented.
 \item functionNames name of the functions/methods that are documented.
-\item dtAll data.table object gathering function names, argument names, and description of the arguments
+\item dfAll data.frame object gathering function names, argument names, and description of the arguments
 }
 }
 \description{
