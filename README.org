@@ -4,4 +4,6 @@
 
 * butils.base
 
-Tools to source R code or install R packages. Not really useful since the R package devtools is a more 
+Tools to manipulate R object, source R code, or install R
+packages. Not really useful since the R package devtools is a more
+comprehensive solution but is customized to fit [[https://github.com/bozenne/emacs-config][emacs-config]].
