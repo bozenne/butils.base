@@ -4,13 +4,27 @@
 \alias{buildPackage}
 \title{Integrative function for building packages}
 \usage{
-buildPackage(package, version = NULL, path = pathGitHub(),
-  register.c.routine = FALSE, compile.attributes = TRUE,
-  update.collate = FALSE, update.date = TRUE, roxygenise = TRUE,
-  build = TRUE, options.build = NULL, untar = TRUE, check = FALSE,
-  options.check = NULL, install = TRUE, options.install = "--build",
-  trace = 2, clear.existing = TRUE, clear.r.check = TRUE,
-  clear.install = TRUE)
+buildPackage(
+  package,
+  version = NULL,
+  path = pathGitHub(),
+  register.c.routine = FALSE,
+  compile.attributes = TRUE,
+  update.collate = FALSE,
+  update.date = TRUE,
+  roxygenise = TRUE,
+  build = TRUE,
+  options.build = NULL,
+  untar = TRUE,
+  check = FALSE,
+  options.check = NULL,
+  install = TRUE,
+  options.install = "--build",
+  trace = 2,
+  clear.existing = TRUE,
+  clear.r.check = TRUE,
+  clear.install = TRUE
+)
 }
 \arguments{
 \item{package}{the name of the package}

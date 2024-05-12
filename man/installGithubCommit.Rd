@@ -4,8 +4,7 @@
 \alias{installGithubCommit}
 \title{Install commit}
 \usage{
-installGithubCommit(repo, ref = "master", temporary = TRUE,
-  trace = TRUE, ...)
+installGithubCommit(repo, ref = "master", temporary = TRUE, trace = TRUE, ...)
 }
 \arguments{
 \item{repo}{Repository address in the format username/repo. See the documentation of \code{devtools::install_github}.}

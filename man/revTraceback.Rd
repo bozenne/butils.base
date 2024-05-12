@@ -4,16 +4,21 @@
 \alias{revTraceback}
 \title{Get and Print Call Stacks (reverse order)}
 \usage{
-revTraceback(x = NULL, max.lines = getOption("deparse.max.lines"),
-  trace = TRUE)
+revTraceback(
+  x = NULL,
+  max.lines = getOption("deparse.max.lines"),
+  trace = TRUE
+)
 }
 \arguments{
 \item{x}{\code{NULL} (default, meaning \code{.Traceback}), or an
     integer count of calls to skip in the current stack, or a list or
-    pairlist of deparsed calls.  See the details.}
+    pairlist of calls.  See the details.}
 
-\item{max.lines}{The maximum number of lines to be printed
-    \emph{per call}.  The default is unlimited.}
+\item{max.lines}{a number, the maximum number of lines to be printed
+    \emph{per call}.  The default is unlimited.  Applies only when \code{x}
+    is \code{NULL}, a \code{\link[base]{list}} or a \code{\link[base]{pairlist}} of
+    calls, see the details.}
 
 \item{trace}{should the call stacks be output}
 }

@@ -4,9 +4,16 @@
 \alias{readGithubCommit}
 \title{Existing commits}
 \usage{
-readGithubCommit(repo, seq.commit = 1:5, rev.commit = FALSE,
-  keep.author = TRUE, keep.name = TRUE, keep.time = TRUE,
-  trace = TRUE, ...)
+readGithubCommit(
+  repo,
+  seq.commit = 1:5,
+  rev.commit = FALSE,
+  keep.author = TRUE,
+  keep.name = TRUE,
+  keep.time = TRUE,
+  trace = TRUE,
+  ...
+)
 }
 \arguments{
 \item{repo}{Repository address in the format username/repo}

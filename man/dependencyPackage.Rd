@@ -4,8 +4,7 @@
 \alias{dependencyPackage}
 \title{Extract the Names of the Dependences of a Package}
 \usage{
-dependencyPackage(name, path, field = c("Imports", "Depends",
-  "Suggests"))
+dependencyPackage(name, path, field = c("Imports", "Depends", "Suggests"))
 }
 \arguments{
 \item{name}{[character] The name of the package.}

@@ -6,5 +6,5 @@
 #' @import devtools
 #' @import Rcpp
 #' @import data.table
-NULL
+"_PACKAGE"
 

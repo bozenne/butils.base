@@ -2,6 +2,7 @@
 
 export(buildPackage)
 export(dependencyPackage)
+export(extractRchunk)
 export(installGithubCommit)
 export(listDocArgs)
 export(pathGitHub)

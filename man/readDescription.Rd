@@ -4,8 +4,7 @@
 \alias{readDescription}
 \title{Load description file}
 \usage{
-readDescription(package, path, field = NULL, rm.blanck = TRUE,
-  rm.comma = TRUE)
+readDescription(package, path, field = NULL, rm.blanck = TRUE, rm.comma = TRUE)
 }
 \arguments{
 \item{package}{the name of the package}

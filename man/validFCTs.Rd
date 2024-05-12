@@ -6,13 +6,26 @@
 \alias{validPath}
 \title{Check argument in functions}
 \usage{
-validCharacter(value1, name1 = as.character(substitute(value1)),
-  valid.length, valid.values = "character", refuse.NULL = TRUE,
-  refuse.duplicates = FALSE, method = NULL, addPP = TRUE)
+validCharacter(
+  value1,
+  name1 = as.character(substitute(value1)),
+  valid.length,
+  valid.values = "character",
+  refuse.NULL = TRUE,
+  refuse.duplicates = FALSE,
+  method = NULL,
+  addPP = TRUE
+)
 
-validPath(value1, name1 = as.character(substitute(value1)), type,
-  method = NULL, addPP = TRUE, extension = NULL,
-  check.fsep = FALSE)
+validPath(
+  value1,
+  name1 = as.character(substitute(value1)),
+  type,
+  method = NULL,
+  addPP = TRUE,
+  extension = NULL,
+  check.fsep = FALSE
+)
 }
 \arguments{
 \item{value1}{the value of the (first) argument to be checked}
